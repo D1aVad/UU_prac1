@@ -10,7 +10,7 @@ def main():
 
     ticker = input("Введите тикер акции (например, «AAPL» для Apple Inc):»")
     period = input("Введите период для данных (например, '1mo' для одного месяца): ")
-
+    threshold = int(input("Введите порог колебания цен в данный период (например, 17): "))
     # Fetch stock data
     stock_data = dd.fetch_stock_data(ticker, period)
 
@@ -21,6 +21,11 @@ def main():
     dplt.create_and_save_plot(stock_data, ticker, period)
     dd.calculate_and_display_average_price(stock_data)
 
+    if dplt.notify_if_strong_fluctuations(stock_data, threshold) > 0:
+        print(f'Цена акций за период {period} колебалась на {dplt.notify_if_strong_fluctuations(stock_data, threshold)}% '
+              f'выше от заданного порога {threshold}')
+    else:
+        print(f'Цена акций за период {period} не превышала заданного порога {threshold}')
 
 if __name__ == "__main__":
     main()
