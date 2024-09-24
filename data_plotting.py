@@ -29,5 +29,14 @@ def create_and_save_plot(data, ticker, period, filename=None):
 
     plt.savefig(filename)
     print(f"График сохранен как {filename}")
+def notify_if_strong_fluctuations(data, threshold):
+    max_ = data['Close'].max()
+    min_ = data['Close'].min()
+    difference_max_min = max_ - min_
+
+    if difference_max_min > threshold:
+        return round(((difference_max_min*100)/threshold)-100, 2)
+    else:
+        return 0
 
 
