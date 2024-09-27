@@ -16,3 +16,9 @@ def calculate_and_display_average_price(data):
 
 def calculate_and_display_average_price(data):
     return data['Close'].mean()
+    
+def export_data_to_csv(data, filename):
+    try:
+        data.to_csv(filename, index=False)
+    except Exception as e:
+        print(f'Не удалось экспортировать данные в CSV. Ошибка: {e}')
