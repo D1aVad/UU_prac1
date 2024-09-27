@@ -26,6 +26,9 @@ def main():
               f'выше от заданного порога {threshold}')
     else:
         print(f'Цена акций за период {period} не превышала заданного порога {threshold}')
+    
+    filename = 'stock_data.csv'
+    dd.export_data_to_csv(stock_data, filename)
 
 if __name__ == "__main__":
     main()
